@@ -8,6 +8,7 @@ package log
 import (
 	"fmt"
 	"github.com/charmbracelet/log"
+	"os"
 
 	"github.com/charmbracelet/lipgloss"
 
@@ -17,7 +18,7 @@ import (
 // Logger is the wrapper over the logger and keeps the style.
 // The style is generated randomly.
 type Logger struct {
-	logger log.Logger
+	logger *log.Logger
 	style  LoggerStyle
 }
 
@@ -73,7 +74,7 @@ func New(prefix string, timestamp bool) (*Logger, error) {
 		return nil, fmt.Errorf("random_style: %w", err)
 	}
 
-	logger := log.New()
+	logger := log.New(os.Stdout)
 	logger.SetPrefix(prefix)
 	logger.SetReportCaller(false)
 	logger.SetReportTimestamp(timestamp)
