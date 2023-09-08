@@ -21,7 +21,7 @@ type Logger struct {
 	style  LoggerStyle
 }
 
-// LoggerStyle defines the various colors for each log parts.
+// LoggerStyle defines the various colors for each log part.
 type LoggerStyle struct {
 	prefix    lipgloss.Style
 	separator lipgloss.Style
@@ -66,7 +66,7 @@ func (style LoggerStyle) setPrimary() LoggerStyle {
 }
 
 // New logger with the prefix and timestamp.
-// It generates the random color style.
+// It generates a random color style.
 func New(prefix string, timestamp bool) (*Logger, error) {
 	randomStyle, err := randomStyle()
 	if err != nil {
@@ -107,7 +107,7 @@ func (logger *Logger) Write(data []byte) (int, error) {
 	return len(data), nil
 }
 
-// Fatal prints the error message and then calls the os.Exit()
+// The Fatal prints the error message and then calls the os.Exit()
 func (logger *Logger) Fatal(title string, kv ...interface{}) {
 	logger.style.setPrimary()
 	logger.logger.Fatal(title, kv...)
